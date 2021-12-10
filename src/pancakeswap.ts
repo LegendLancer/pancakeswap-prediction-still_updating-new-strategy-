@@ -1,0 +1,19 @@
+import dotenv from "dotenv";
+import { parseStrategy, PLATFORMS, startPolling } from "./lib";
+
+dotenv.config();
+
+const strategy = parseStrategy(process.argv);
+
+startPolling(
+  process.env.PRIVATE_KEY,
+  process.env.BET_AMOUNT,
+  process.env.MAX_STEPS,
+  process.env.TREND,
+  process.env.INITIAL_AMOUNT,
+  strategy,
+  false,
+  PLATFORMS.PancakeSwap
+).catch((error) => {
+  console.error(error);
+});
